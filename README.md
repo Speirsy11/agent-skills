@@ -14,10 +14,27 @@ skills/
 
 ## Install on another machine
 
+**Option A — `skills` CLI** (copies into place, tracked in `.skill-lock.json`):
+
 ```bash
-npx skills add <owner>/agent-skills          # all skills
-npx skills add <owner>/agent-skills -s '*'   # pick interactively
+npx skills add Speirsy11/agent-skills -a '*' -g -y   # everything
+npx skills add Speirsy11/agent-skills                # pick interactively
 ```
+
+**Option B — clone + symlink** (repo stays the source of truth; `git pull` = update):
+
+```bash
+git clone git@github.com:Speirsy11/agent-skills.git ~/Developer/agent-skills
+
+for skill in ~/Developer/agent-skills/skills/*/*; do
+  name=$(basename "$skill")
+  ln -sfn "$skill" ~/.agents/skills/"$name"                      # agents dir -> repo
+  ln -sfn ../../.agents/skills/"$name" ~/.claude/skills/"$name"  # claude -> agents dir
+done
+```
+
+Claude Code reads `~/.claude/skills/`, which resolves through `~/.agents/skills/`
+into the repo — edit or pull in the repo and every agent sees it immediately.
 
 The `local/` skills assume machine-specific infrastructure and will only work
 where that infra exists:
