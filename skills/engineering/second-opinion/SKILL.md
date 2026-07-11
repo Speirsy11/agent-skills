@@ -19,7 +19,13 @@ session, so a different model judges it independently.
    - Claude → Codex: `codex exec "<prompt>"` (or `codex review` for a pure diff).
    - Codex → Claude: `claude -p "<prompt>"`.
    Pass large artifacts by file path; capture the full output.
-4. **Report back** the other agent's verdict, the issues it caught, and where it
+4. **Context, not logs.** If the reviewer needs background, write it a neutral
+   brief — the user's original ask, hard constraints, what was tried — rather
+   than pointing it at your session log. Logs anchor the reviewer on your
+   reasoning (the thing step 2 exists to prevent) and can leak unrelated or
+   private content across vendors. Only share a log path after the blind
+   verdict is in, to resolve a disagreement, and with the user's OK.
+5. **Report back** the other agent's verdict, the issues it caught, and where it
    disagrees with you.
-5. **Surface conflicts.** When the two opinions diverge, present both to the user
+6. **Surface conflicts.** When the two opinions diverge, present both to the user
    side by side — don't silently reconcile or override.
