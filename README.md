@@ -26,17 +26,22 @@ where that infra exists:
 - `html-wireframe` → the OpenClaw `canvas` plugin + connected nodes
 - `discord-formatting` → the Rocky/Discord setup
 
-## Provenance
+## Provenance & credits
 
 Some skills are third-party, vendored here for a self-contained clone — see
-`skill-lock.json` for each one's source (`mattpocock/skills`,
-`vercel-labs/skills`, `rendercv/rendercv-skill`). Update them with
-`npx skills update`.
+`skill-lock.json` for each one's exact source. Credit to the original authors:
+
+- [`mattpocock/skills`](https://github.com/mattpocock/skills) (**MIT**) —
+  `grilling`, `grill-with-docs`, `handoff`, `teach`, `writing-great-skills`,
+  `tdd`, `implement`, `prototype`, `diagnosing-bugs`,
+  `improve-codebase-architecture`, `domain-modeling`, `to-tickets`, `wayfinder`,
+  `setup-matt-pocock-skills`
+- [`vercel-labs/skills`](https://github.com/vercel-labs/skills) — `find-skills`
+- [`rendercv/rendercv-skill`](https://github.com/rendercv/rendercv-skill) — `rendercv`
+
+Update the vendored copies with `npx skills update`.
 
 Authored here (originals):
 
-- **engineering/** — `git-etiquette`, `add-new-feature`, `review-branch`, `second-opinion`
+- **engineering/** — `git-etiquette`, `add-new-feature`, `review-branch`, `second-opinion`, `codex-computer-use`
 - **local/** — `create-new-service`, `html-wireframe`
-
-> ⚠️ This repo vendors third-party skills. Keep it **private**, or replace the
-> vendored copies with `skill-lock.json` references before making it public.
