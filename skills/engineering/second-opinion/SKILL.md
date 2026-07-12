@@ -9,16 +9,20 @@ description: Get an independent second opinion from the *other* coding agent —
 Route the thing under review to the *other* agent in a fresh, non-interactive
 session, so a different model judges it independently.
 
-1. **Detect self.** If `$CLAUDECODE` is set, you're Claude Code → ask **Codex**.
-   Otherwise you're Codex → ask **Claude**.
+1. **Detect self.** `$CLAUDECODE` set → you're Claude Code, ask **Codex**. In a
+   Codex session → ask **Claude**. If you can't tell which you are, or the other
+   agent's CLI turns out to be missing or unauthenticated, tell the user and
+   stop — a "second opinion" from your own model isn't one.
 2. **Package artifact + question without leading the witness.** Give the
    diff/plan/decision/answer and the specific question — but *not* your own
    conclusion or the reasoning you want confirmed. State what "good" means
    (acceptance criteria), not what you decided.
-3. **Call the other agent non-interactively:**
-   - Claude → Codex: `codex exec "<prompt>"` (or `codex review` for a pure diff).
-   - Codex → Claude: `claude -p "<prompt>"`.
-   Pass large artifacts by file path; capture the full output.
+3. **Call the other agent non-interactively.** Write the prompt to a scratch
+   file (a temp dir — never inside the repo) so quoting and length aren't a
+   problem, then:
+   - Claude → Codex: `codex exec "$(cat <file>)"` (or `codex review` for a pure diff).
+   - Codex → Claude: `claude -p "$(cat <file>)"`.
+   Reference large artifacts by a path the other process can read.
 4. **Context, not logs.** If the reviewer needs background, write it a neutral
    brief — the user's original ask, hard constraints, what was tried — rather
    than pointing it at your session log. Logs anchor the reviewer on your

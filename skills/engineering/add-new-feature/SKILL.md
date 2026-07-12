@@ -9,23 +9,27 @@ Orchestrate the feature and delegate the heavy phases to subagents so this
 context stays clean. Follow the **git-etiquette** skill throughout — branch
 naming, PR format, merge gate.
 
-1. **Branch.** Pull the default branch, create a task-type branch
-   (git-etiquette).
+1. **Branch.** From a clean worktree (stash or ask if it's dirty), sync the
+   default branch and create a task-type branch (git-etiquette).
 2. **Implement.** Delegate to a subagent that builds the feature test-first with
    the **tdd** skill. Brief it with the spec, the branch, and repo conventions;
    it returns a summary of the diff and how it verified.
 3. **Verify green.** Re-run the full test suite and typecheck/build yourself —
    don't trust the worker's summary. Send failures back before moving on.
 4. **Self-review.** Run the **review-branch** skill on the diff (Standards +
-   Spec against the feature spec). Where practical, run its sub-agents on a
-   *different model* from the step-2 implementer — two models are less likely to
-   share the same blind spot. Address blocking findings (loop back to a step-2
-   worker if needed) before opening the PR.
+   Spec against the feature spec). If the host lets you pick a sub-agent model,
+   use a *different model* from the step-2 implementer — two models are less
+   likely to share the same blind spot. Address blocking findings (loop back to
+   a step-2 worker if needed) before opening the PR.
 5. **Open the PR.** Push and open (no approval needed); write the description
    with a summary, how you verified, and git-etiquette's risk callouts.
-6. **Resolve review.** Poll the PR every ~5 min via the **loop** skill until
-   CodeRabbit and human reviewers have commented. For each: reply, push a
-   follow-up fix, re-request review. Done when every thread is resolved or
-   agreed non-blocking.
+6. **Resolve review.** Check what review this repo actually has (bots, required
+   human reviewers) — if none is configured, note that and go to step 7. Poll
+   the PR every ~5 min (use a polling skill like **loop** if the host has one)
+   for up to ~30 min; if review still hasn't arrived, hand back to the user
+   instead of waiting forever. For each comment: reply, push a follow-up fix,
+   re-request review. Done when every thread is resolved or agreed non-blocking.
 7. **Merge.** Once CI is green and review has passed, ask for explicit approval,
-   then merge and delete the branch.
+   then merge and delete the branch (local and remote). If approval is declined,
+   stop and report the PR as open with what's outstanding — that's a valid end
+   state.

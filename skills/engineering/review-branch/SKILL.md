@@ -8,12 +8,15 @@ description: Review a branch/diff on two axes — Standards (repo conventions, c
 Review `git diff <fixed-point>...HEAD` on two axes, run as parallel
 `general-purpose` sub-agents (so they don't pollute each other's context), then
 report side by side. Never rerank across axes — a change can pass one and fail
-the other. To *apply* or *post* findings, hand off to the built-in
-`/code-review` (`--fix` applies, `--comment` posts inline PR comments, `ultra`
-for a deep cloud review).
+the other. To *apply* or *post* findings, hand off to the host's code-review
+command if it has one (Claude Code's built-in `/code-review`: `--fix` applies,
+`--comment` posts inline PR comments, `ultra` for a deep cloud review);
+otherwise apply agreed fixes yourself.
 
-1. **Pin the fixed point.** Commit/branch/tag/merge-base the user names (ask if
-   unspecified). Verify it resolves and the diff is non-empty before spawning.
+1. **Pin the fixed point.** Commit/branch/tag the user names; if unspecified,
+   default to the merge-base with the default branch and say so. For a PR,
+   fetch its head and diff against its base. Verify the point resolves and the
+   diff is non-empty before spawning.
 2. **Find the spec.** Issue refs in commits (`#123`) → a path the user gave →
    a PRD/spec under `docs/`, `specs/`, `.scratch/`. If none, Spec reports "no spec".
 3. **Find the standards.** `CODING_STANDARDS.md` / `CONTRIBUTING.md` if present.

@@ -8,16 +8,20 @@ Match the repo before inventing anything: check the existing branch names,
 commit style, and PR format, and follow them wherever a convention is already
 in use.
 
-**Branches:** the default branch is `main` — name it that in new repos, and
-rename `master` → `main` if you initialised one by accident. If the repo has no
+**Branches:** the default branch is `main` — name it that in new repos, and if
+a repo you just created (not yet shared or published) came up as `master`,
+rename it. Never rename the default branch of an established repo without
+being asked. If the repo has no
 established convention for work branches, use `<type>/<short-description>` in
 kebab-case, where type is one of `feature`, `bugfix`, `refactor`, `docs` (pick
 the closest). E.g. `feature/dark-mode`, `bugfix/login-redirect-loop`.
 
-**Push freely.** Commit and push additive work on top of existing commits
-without asking. The one exception is force-pushing or rewriting
-already-published history — that's destructive, not additive, so it needs a
-fresh OK every time.
+**Push freely — on a work branch.** Commit and push additive work on top of
+existing commits without asking, but don't commit directly to the default
+branch unless the user asks or the repo clearly works that way. If a push is
+rejected as non-fast-forward, fetch and reconcile — never force-push past it.
+Force-pushing or rewriting already-published history is destructive, not
+additive, so it needs a fresh OK every time.
 
 **Merge is the one hard gate.** Never merge without the user's explicit
 approval, and only ask once CI and code review have passed.
