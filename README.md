@@ -42,6 +42,9 @@ where that infra exists:
 - `create-new-service` → the `homed` homelab registry + AdGuard on this Mac mini
 - `html-wireframe` → the OpenClaw `canvas` plugin + connected nodes
 - `discord-formatting` → the Rocky/Discord setup
+- `browse`, `scrape`, `skillify` → the gstack browse runtime at
+  `~/.local/share/gstack-browse` + `~/bin/browse` (arm64 macOS binary)
+- `make-pdf` → `~/bin/make-pdf` (arm64 macOS binary) + the browse runtime
 
 ## Provenance & credits
 
@@ -55,6 +58,10 @@ Some skills are third-party, vendored here for a self-contained clone — see
   `setup-matt-pocock-skills`
 - [`vercel-labs/skills`](https://github.com/vercel-labs/skills) — `find-skills`
 - [`rendercv/rendercv-skill`](https://github.com/rendercv/rendercv-skill) — `rendercv`
+- [`garrytan/gstack`](https://github.com/garrytan/gstack) (**MIT**) —
+  `browse`, `scrape`, `skillify`, `make-pdf` are lean rewrites of the gstack
+  skills; the `browse`/`make-pdf` binaries are compiled from gstack source
+  (v1.60.1.0) into `~/.local/share/gstack-browse` and `~/bin`
 
 Update the vendored copies with `npx skills update`.
 
