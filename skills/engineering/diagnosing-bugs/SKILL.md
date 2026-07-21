@@ -132,3 +132,12 @@ Required before declaring done:
 - [ ] The hypothesis that turned out correct is stated in the commit / PR message — so the next debugger learns
 
 **Then ask: what would have prevented this bug?** If the answer involves architectural change (no good test seam, tangled callers, hidden coupling) hand off to the `/improve-codebase-architecture` skill with the specifics. Make the recommendation **after** the fix is in, not before — you have more information now than when you started.
+
+## First, check the observation mechanism is healthy
+
+Before treating a failure as a product bug, confirm the failing object is the
+*product* and not your own **toolchain**. A failed edit, a missing command, a
+401, or a schema error is evidence about your tools, not about the bug — acting
+on it as a product symptom is a category error. When the failing object is auth,
+a tool schema, a path, or the sandbox, switch to `tool-recovery`; only diagnose
+the product once you trust the instrument you're diagnosing it with.
