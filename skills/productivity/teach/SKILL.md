@@ -135,6 +135,13 @@ Some learning topics lend themselves to reference:
 
 Glossaries, in particular, are an essential reference. Once one is created, it should be adhered to in every lesson.
 
+## Assessment ergonomics
+
+When you generate quizzes or checks for understanding, **randomise the position
+of the correct answer** — don't let it always land in slot A (a generated quiz
+did exactly that). Vary the shape of questions, and always offer a re-ask path
+if the user selects an option by accident rather than locking their first tap in.
+
 ## `NOTES.md`
 
 The user will sometimes express preferences of how they want to be taught, or things you should keep in mind. This is the place to record those preferences, so you can refer back to them when designing lessons or working with the user.
