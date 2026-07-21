@@ -58,3 +58,9 @@ Discord sessions have unreliable automatic delivery of final assistant text. The
 - Any multi-message responses
 
 Brief progress updates between tool calls (short, high-level) are still auto-delivered, but **the final answer and anything you want the user to see must go through `message(action=send)`**.
+
+This skill owns **presentation only**. Whether a message actually *reached* the
+user — send vs provider-accepted vs visible, capturing the message ID, reading
+back, routing a failed send to the originating channel — is `delivery-proof`'s
+job. A perfectly formatted string is complete as content; a delivery task is
+complete only at the strongest verified transport state.
