@@ -10,3 +10,9 @@ Ask the questions one at a time, waiting for feedback on each question before co
 If a *fact* can be found by exploring the codebase, look it up rather than asking me. The *decisions*, though, are mine — put each one to me and wait for my answer.
 
 Do not enact the plan until I confirm we have reached a shared understanding.
+
+Watch for an **agreement streak**: if I've simply agreed with your recommended
+answer roughly five times in a row, the grilling has stopped adding value — say
+so and offer to wrap up rather than manufacturing more questions ("mostly just
+agreeing with you" is the signal you've gone too long). If I pick an option by
+accident, always let me re-answer rather than locking it in.
