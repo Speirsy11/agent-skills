@@ -9,13 +9,21 @@ Orchestrate the feature and delegate the heavy phases to subagents so this
 context stays clean. Follow the **git-etiquette** skill throughout — branch
 naming, PR format, merge gate.
 
-1. **Branch.** From a clean worktree (stash or ask if it's dirty), sync the
-   default branch and create a task-type branch (git-etiquette).
+1. **Branch & lock the target.** From a clean worktree (stash or ask if it's
+   dirty), sync the default branch and create a task-type branch (git-etiquette).
+   Before editing, lock the exact target and turn the spec into binary acceptance
+   items with **target-lock** — including how each will be verified on the real
+   runtime, not just by tests.
 2. **Implement.** Delegate to a subagent that builds the feature test-first with
-   the **tdd** skill. Brief it with the spec, the branch, and repo conventions;
-   it returns a summary of the diff and how it verified.
-3. **Verify green.** Re-run the full test suite and typecheck/build yourself —
-   don't trust the worker's summary. Send failures back before moving on.
+   the **tdd** skill; pick the worker's model/effort with **model-routing** and
+   brief it with a bounded task packet (spec, branch, repo conventions). It
+   returns a summary of the diff and how it verified. For long multi-stage
+   features, run **context-guard** so constraints survive compaction.
+3. **Verify green — and verify the real thing.** Re-run the full test suite and
+   typecheck/build yourself — don't trust the worker's summary. Then satisfy
+   **proof-of-done**: exercise the feature on the running system and show the
+   evidence (for visual surfaces, **visual-verify**; for data a UI renders,
+   **frontend-parity**). Send failures back before moving on.
 4. **Self-review.** Run the **review-branch** skill on the diff (Standards +
    Spec against the feature spec). If the host lets you pick a sub-agent model,
    use a *different model* from the step-2 implementer — two models are less
@@ -33,3 +41,12 @@ naming, PR format, merge gate.
    then merge and delete the branch (local and remote). If approval is declined,
    stop and report the PR as open with what's outstanding — that's a valid end
    state.
+
+## Large builds: epic-per-PR
+
+When the work is too big for one PR, don't hand the whole thing to one agent.
+Plan it into **epics, each shipped as its own PR**, tracked in a checkable
+delivery doc; run this skill once per epic, then update the doc and pick the next
+unblocked epic. This is the token-management pattern proven on LLMBench —
+"manage usage across accounts instead of one agent doing everything" — and it
+keeps each context clean.
