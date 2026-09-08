@@ -6,17 +6,18 @@ description: Choose cost-efficient OpenAI models and reasoning effort for subage
 
 # Model routing
 
-Match the model to the task's size and complexity. Use the smallest model that
-can do the work reliably, and honor explicit model or effort requests.
+Default to GPT-5.6 Luna at max reasoning as the main implementation workhorse
+for subagents. Delegate to larger models only when their strengths or the task's
+complexity make them necessary. Honor explicit model or effort requests.
 
 | Model ID | Use for | Starting effort |
 |---|---|---|
-| `gpt-5.6-luna` | Simple information retrieval, extraction, classification, repetitive edits, and straightforward tool calls | low |
-| `gpt-5.6-terra` | Everyday coding, bounded bug fixes, and multi-step work with a known design | medium |
-| `gpt-5.6-sol` | Complex implementation, debugging, review, and orchestration requiring substantial judgment | medium |
-| `gpt-6-astra` | Hardest end-to-end work: ambiguous architecture, difficult research, cross-system diagnosis, and demanding code/browser workflows | medium or high |
+| `gpt-5.6-luna` | Default implementation subagent: features, bug fixes, tests, and multi-step tool work; also simple retrieval and repetitive tasks | max for implementation; low for simple work |
+| `gpt-5.6-terra` | Bounded implementation needing more model capability when Luna is insufficient | medium |
+| `gpt-5.6-sol` | Complex debugging, review, or orchestration needing judgment beyond Luna's capabilities | medium or high |
+| `gpt-6-astra` | Hardest architecture, research, cross-system diagnosis, and end-to-end problems requiring its strongest reasoning | medium or high |
 
-Use supported reasoning levels: low for simple work, medium for ordinary
-problem-solving, high for difficult reasoning. Reserve xhigh and above for
-exceptionally demanding tasks. Increase model strength or effort when needed.
+Use supported reasoning levels. Keep Luna at max for implementation; use low
+for simple retrieval or mechanical work. Choose a larger model upfront when
+clearly warranted, or escalate when Luna cannot resolve the task reliably.
 Before spawning a subagent, tell the user its model and reasoning level.
